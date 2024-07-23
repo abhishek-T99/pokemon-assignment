@@ -2,7 +2,7 @@ import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.core.database import sessionmanager
-from app.api.v1.routers.pokemons import router as pokemon_router
+from app.api.v1.main import api_router
 
 from app.core.config import config
 
@@ -21,8 +21,8 @@ async def lifespan(app: FastAPI):
         await sessionmanager.close()
 
 
-app = FastAPI(lifespan=lifespan, title=config.project_name, docs_url="/api/docs")
+app = FastAPI(lifespan=lifespan, title=config.project_name, docs_url="/api/v1/docs")
 
 
 # Routers
-app.include_router(pokemon_router)
+app.include_router(api_router)
