@@ -14,8 +14,8 @@ Ensure you have the following installed on your system or hosted on docker:
 1. **Clone the repository**:
 
 ```bash
-git clone https://github.com/abhishek-T99/pokemon-api.git
-cd pokemon-api
+git clone https://github.com/abhishek-T99/pokemon-assignment.git
+cd pokemon-assignment
 ```
 
 2. **Install Python dependencies**:
