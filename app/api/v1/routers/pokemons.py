@@ -2,18 +2,33 @@ from typing import List
 from app.api.v1.dependencies import SessionDep
 import app.crud.pokemon
 from app.utils.fetch_pokemon import fetch_pokemon_details, store_pokemon_db
-from app.schemas.pokemon import PokemonSchema
+from app.schemas.pokemon import PokemonPaginatedResponseSchema
 import app.crud
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 router = APIRouter()
 
+
 POKE_API_URL="https://pokeapi.co/api/v2/pokemon?limit=1500"
 
-@router.get("/", response_model=List[PokemonSchema])
-async def list_all_pokemons(*, session: SessionDep):
+
+@router.get("/", response_model=PokemonPaginatedResponseSchema)
+async def list_all_pokemons(
+    *,
+    session: SessionDep,
+    skip: int = Query(0, ge=0),
+    limit: int = Query(10, le=10000)
+):
     pokemons = await app.crud.pokemon.get_pokemons(session=session)
-    return pokemons
+    paginated_pokemons = pokemons[skip: skip + limit]
+
+    return {
+        "total": len(pokemons),
+        "skip": skip,
+        "limit": limit,
+        "data": paginated_pokemons
+    }
+
 
 @router.post("/extract-and-store")
 async def store_pokemon(*, session: SessionDep):
