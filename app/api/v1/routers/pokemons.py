@@ -1,3 +1,4 @@
+from typing import Optional
 from app.api.v1.dependencies import SessionDep
 import app.crud.pokemon
 from app.utils.fetch_pokemon import fetch_pokemon_details, store_pokemon_db
@@ -16,9 +17,10 @@ async def list_all_pokemons(
     *,
     session: SessionDep,
     skip: int = Query(0, ge=0),
-    limit: int = Query(10, le=10000)
+    limit: int = Query(10, le=10000),
+    name: Optional[str] = Query(None, min_length=1)
 ):
-    pokemons = await app.crud.pokemon.get_pokemons(session=session)
+    pokemons = await app.crud.pokemon.get_pokemons(session=session, name=name)
     paginated_pokemons = pokemons[skip: skip + limit]
 
     return {
