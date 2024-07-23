@@ -1,4 +1,3 @@
-from typing import List
 from app.api.v1.dependencies import SessionDep
 import app.crud.pokemon
 from app.utils.fetch_pokemon import fetch_pokemon_details, store_pokemon_db
