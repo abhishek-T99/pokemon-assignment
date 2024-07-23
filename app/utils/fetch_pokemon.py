@@ -2,16 +2,7 @@ import httpx
 import asyncio
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.pokemon import Pokemon
-from app.core.config import config
 
-
-# async def fetch_all_pokemon():
-#     url = config.poke_api_url
-#     async with httpx.AsyncClient() as client:
-#         response = await client.get(url)
-#         response.raise_for_status()
-#         data = response.json()
-#     return data['results']
 
 async def fetch_pokemon_details(url: str):
     async with httpx.AsyncClient() as client:
@@ -42,6 +33,6 @@ async def fetch_pokemon_details(url: str):
 
 async def store_pokemon_db(db_session: AsyncSession, pokemon_list: list):
     for pokemon in pokemon_list:
-        db_pokemon = Pokemon(name=pokemon['name'], image=pokemon['url'], types=pokemon['types'])
+        db_pokemon = Pokemon(name=pokemon['name'], image=pokemon['image'], types=pokemon['types'])
         db_session.add(db_pokemon)
     await db_session.commit()
