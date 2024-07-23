@@ -1,0 +1,11 @@
+alembic
+fastapi
+asyncpg
+sqlalchemy
+sqlalchemy[asyncio]
+uvicorn
+python-dotenv
+sqlalchemy-utils
+ipdb
+pydantic
+pydantic-settings
