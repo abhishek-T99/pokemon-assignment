@@ -12,6 +12,7 @@ log = logging.getLogger("uvicorn")
 class Config(BaseSettings):
     database_url: AnyUrl | str
     project_name: str
+    poke_api_url: AnyUrl | str
     echo_sql: bool = False
 
     class Config:
