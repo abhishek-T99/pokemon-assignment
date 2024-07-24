@@ -1,5 +1,4 @@
 alembic
-aiohttp
 fastapi
 asyncpg
 sqlalchemy
