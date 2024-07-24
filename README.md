@@ -2,13 +2,6 @@
 
 ## Setting up the Project for Development
 
-### Prerequisites
-
-Ensure you have the following installed on your system or hosted on docker:
-
-1. **Python**
-2. **Redis**
-
 ### Installation Steps
 
 1. **Clone the repository**:
@@ -38,18 +31,28 @@ cp .env.sample .env
 alembic upgrade heads
 ```
 
-5. **Start Redis**:
-
-   If Redis is not already running, start it with:
-
-```bash
-redis-server
-```
-
-6. **Run the FastAPI Project**:
+5. **Run the FastAPI Project**:
 
    Start the FastAPI server with:
 
 ```bash
 uvicorn app.main:app --reload
 ```
+
+## API Workings
+
+### Overview
+
+The Pokemon Listing API is designed to fetch Pokemon data from an external API, store it in a local database, and serve requests from the database. This reduces the need to repeatedly call the external API and improves performance.
+
+### Endpoints
+
+1. **List Pokemon**
+
+   - **Endpoint**: `/api/v1/pokemons/`
+   - **Method**: `GET`
+   - **Description**: Retrieves a paginated list of Pokemon from the database and fetches Pokemon data from the external API and store it in the database if database is  empty.
+
+   ```bash
+   curl http://localhost:8000/api/v1/pokemon?limit=10
+   ```
