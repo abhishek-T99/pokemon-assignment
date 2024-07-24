@@ -13,4 +13,4 @@ class PokemonPaginatedResponseSchema(BaseModel):
     total: int
     skip: int
     limit: int
-    data: List[PokemonSchema]
+    response: List[PokemonSchema]

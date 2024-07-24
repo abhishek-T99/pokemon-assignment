@@ -8,11 +8,16 @@ from app.schemas.pokemon import PokemonSchema
 
 async def get_pokemons(
         session: AsyncSession,
-        name: Optional[str] = None
+        name: Optional[str] = None,
+        type: Optional[str] = None,
 ) -> List[PokemonSchema]:
     query = select(Pokemon)
     if name:
         query = query.filter(Pokemon.name.ilike(f"%{name}%"))
+
+    if type:
+        query = query.filter(Pokemon.types.any(type))
+
     pokemons = (await session.scalars(query)).all()
     if not pokemons:
         raise HTTPException(status_code=404, detail="No pokemons found")

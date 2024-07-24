@@ -17,17 +17,18 @@ async def list_all_pokemons(
     *,
     session: SessionDep,
     skip: int = Query(0, ge=0),
-    limit: int = Query(10, le=10000),
-    name: Optional[str] = Query(None, min_length=1)
+    limit: int = Query(10, le=2000),
+    name: Optional[str] = Query(None),
+    type: Optional[str] = Query(None)
 ):
-    pokemons = await app.crud.pokemon.get_pokemons(session=session, name=name)
+    pokemons = await app.crud.pokemon.get_pokemons(session=session, name=name, type=type)
     paginated_pokemons = pokemons[skip: skip + limit]
 
     return {
         "total": len(pokemons),
         "skip": skip,
         "limit": limit,
-        "data": paginated_pokemons
+        "response": paginated_pokemons
     }
 
 
