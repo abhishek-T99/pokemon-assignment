@@ -45,6 +45,12 @@ uvicorn app.main:app --reload
 
 The Pokemon Listing API is designed to fetch Pokemon data from an external API, store it in a local database, and serve requests from the database. This reduces the need to repeatedly call the external API and improves performance.
 
+### Swagger Docs
+
+```bash
+http://localhost:8000/api/v1/docs
+```
+
 ### Endpoints
 
 1. **List Pokemon**
@@ -54,13 +60,13 @@ The Pokemon Listing API is designed to fetch Pokemon data from an external API, 
    - **Description**: Retrieves a paginated list of Pokemon from the database and fetches Pokemon data from the external API and store it in the database if database is  empty.
 
 ```bash
-curl http://localhost:8000/api/v1/pokemon?limit=10
+curl http://localhost:8000/api/v1/pokemons?limit=10
 ```
 
 ```bash
-curl http://localhost:8000/api/v1/pokemon?limit=10&name=pikachu
+curl http://localhost:8000/api/v1/pokemons?limit=10&name=pikachu
 ```
 
 ```bash
-curl http://localhost:8000/api/v1/pokemon?limit=10&name=pikachu&type=electric
+curl http://localhost:8000/api/v1/pokemons?limit=10&name=pikachu&type=electric
 ```
