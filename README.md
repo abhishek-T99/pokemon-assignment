@@ -53,6 +53,14 @@ The Pokemon Listing API is designed to fetch Pokemon data from an external API, 
    - **Method**: `GET`
    - **Description**: Retrieves a paginated list of Pokemon from the database and fetches Pokemon data from the external API and store it in the database if database is  empty.
 
-   ```bash
-   curl http://localhost:8000/api/v1/pokemon?limit=10
-   ```
+```bash
+curl http://localhost:8000/api/v1/pokemon?limit=10
+```
+
+```bash
+curl http://localhost:8000/api/v1/pokemon?limit=10&name=pikachu
+```
+
+```bash
+curl http://localhost:8000/api/v1/pokemon?limit=10&name=pikachu&type=electric
+```
