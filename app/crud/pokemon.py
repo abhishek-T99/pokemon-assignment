@@ -1,6 +1,5 @@
 from typing import List,Optional
 from app.models import Pokemon
-from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.schemas.pokemon import PokemonSchema
@@ -19,6 +18,11 @@ async def get_pokemons(
         query = query.filter(Pokemon.types.any(type))
 
     pokemons = (await session.scalars(query)).all()
-    if not pokemons:
-        raise HTTPException(status_code=404, detail="No pokemons found")
     return pokemons
+
+
+async def get_total_pokemon_count(
+        session: AsyncSession
+) -> int:
+    count = (await session.scalars(select(Pokemon))).all()
+    return len(count)
